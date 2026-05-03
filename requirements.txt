@@ -1,0 +1,9 @@
+torch
+transformers
+datasets
+faiss-cpu
+pyserini
+sentence-transformers
+numpy
+pandas
+tqdm
