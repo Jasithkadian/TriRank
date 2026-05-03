@@ -14,3 +14,21 @@ Authors:
 - Kurian Jose
 
   
+
+
+##  Key Contributions
+
+- 🔹 3-stage hybrid retrieval pipeline:
+  - BM25 (lexical retrieval)
+  - BGE-large-en-v1.5 (dense retrieval)
+  - ColBERTv2 (token-level reranking)
+
+- 🔹 Training-free architecture (zero fine-tuning required)
+
+- 🔹 Reciprocal Rank Fusion (RRF) for merging results
+
+- 🔹 GPU-optimized PyTorch chunked exact search over 8.8M embeddings
+
+- 🔹 Achieved:
+  - nDCG@10 = 0.4638
+  - MRR@10 = 0.3825
