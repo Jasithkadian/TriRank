@@ -32,3 +32,8 @@ Authors:
 - 🔹 Achieved:
   - nDCG@10 = 0.4638
   - MRR@10 = 0.3825
+ 
+
+
+Pipeline Flow:
+Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Ranking
