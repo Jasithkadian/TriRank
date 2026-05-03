@@ -1,57 +1,78 @@
 # TriRank: Hybrid Retrieval Framework (BM25 + BGE + ColBERTv2)
 
-A training-free 3-stage hybrid retrieval pipeline combining lexical, dense, and token-level reranking to achieve state-of-the-art retrieval performance on MS MARCO and BEIR benchmarks.
+A training-free 3-stage hybrid retrieval pipeline combining lexical, dense, and token-level reranking to achieve high-precision retrieval performance on MS MARCO and BEIR benchmarks.
 
+---
 
-## 📄 Research Paper
+##  Architecture
+
+<p align="center">
+  <img src="images/pipeline.png" width="800"/>
+</p>
+
+<p align="center">
+  <em>Figure 1: Overview of the TriRank Pipeline</em>
+</p>
+
+---
+
+##  Research Paper
 
 This repository contains the official implementation of our research paper:
 
 **"TriRank: A Hybrid Retrieval Framework Combining BGE-large-en-v1.5 and ColBERTv2 for High-Precision Information Retrieval"**
 
-Authors:
-- Jasith Kadian
-- Kurian Jose
+**Authors:**
+- Jasith Kadian  
+- Kurian Jose  
 
-  
-
+---
 
 ##  Key Contributions
 
-- 🔹 3-stage hybrid retrieval pipeline:
+- 3-stage hybrid retrieval pipeline:
   - BM25 (lexical retrieval)
   - BGE-large-en-v1.5 (dense retrieval)
   - ColBERTv2 (token-level reranking)
 
-- 🔹 Training-free architecture (zero fine-tuning required)
+- Training-free architecture (zero fine-tuning required)
 
-- 🔹 Reciprocal Rank Fusion (RRF) for merging results
+- Reciprocal Rank Fusion (RRF) for merging ranked results
 
-- 🔹 GPU-optimized PyTorch chunked exact search over 8.8M embeddings
+- GPU-optimized PyTorch chunked exact search over 8.8M embeddings
 
-- 🔹 Achieved:
+- Achieved:
   - nDCG@10 = 0.4638
   - MRR@10 = 0.3825
- 
 
+---
 
-Pipeline Flow:
-Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Ranking
+##  What is TriRank?
 
+TriRank is a hybrid retrieval system that combines keyword-based retrieval, semantic understanding, and token-level reranking to improve search precision.
 
+It integrates:
+- BM25 for exact keyword matching
+- BGE embeddings for semantic similarity
+- ColBERTv2 for fine-grained token interaction
 
+---
 
+##  Pipeline Flow
 
+Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Results
+
+---
 
 ##  Pipeline Breakdown
 
 ### Stage 1: Parallel Retrieval
-- BM25 for lexical matching
+- BM25 for exact keyword matching
 - BGE-large-en-v1.5 for semantic retrieval
 
 ### Stage 2: Dense Retrieval Optimization
-- Chunked exact search using PyTorch
-- Avoids ANN approximation errors
+- PyTorch chunked exact search
+- Eliminates ANN approximation errors
 
 ### Stage 3: Fusion
 - Reciprocal Rank Fusion (RRF)
@@ -59,9 +80,7 @@ Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Ranking
 ### Stage 4: Reranking
 - ColBERTv2 with token-level MaxSim scoring
 
-
-
-
+---
 
 ##  Results
 
@@ -71,11 +90,80 @@ Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Ranking
 | Dense (BGE) | 0.4376 | 0.3619 |
 | TriRank | **0.4638** | **0.3825** |
 
-
+---
 
 ## 🛠️ Installation
 
 ```bash
-git clone https://github.com/yourusername/trirank.git
-cd trirank
+git clone https://github.com/Jasithkadian/TriRank.git
+cd TriRank
 
+
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+pip install torch transformers datasets faiss-cpu pyserini sentence-transformers numpy pandas tqdm
+
+Usage
+
+Run notebooks in this order:
+
+notebooks/00_setup.ipynb
+notebooks/01_bm25_baseline.ipynb
+notebooks/02_bge_dense_baseline.ipynb
+notebooks/02_bge_dense_exact.ipynb
+notebooks/03_rrf_fusion.ipynb
+notebooks/04_colbert_reranking.ipynb
+notebooks/05_ablations.ipynb
+notebooks/06_beir_benchmarks.ipynb
+notebooks/07_analytics.ipynb
+
+
+Project Structure
+
+trirank/
+│── notebooks/
+│── scripts/
+│── docs/
+│── images/
+│── README.md
+│── requirements.txt
+
+
+Datasets
+MS MARCO
+BEIR Benchmark:
+SciFact
+NFCorpus
+ArguAna
+TREC-COVID
+
+Dataset setup instructions are inside:
+ 
+notebooks/00_setup.ipynb
+
+
+Reproducibility
+
+To reproduce results:
+
+Run notebooks sequentially
+Use MS MARCO / BEIR datasets
+Ensure GPU for dense retrieval
+
+Expected performance:
+nDCG@10 ≈ 0.4638
+MRR@10 ≈ 0.3825
+
+
+Additional Resources
+ docs/TriRank_Project_Guide.md
+ docs/workflow.md
+ docs/memory_prompt.md
+
+Contact
+
+Jasith Kadian
+Email: jasithkadian@gmail.com
