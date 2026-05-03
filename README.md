@@ -37,3 +37,45 @@ Authors:
 
 Pipeline Flow:
 Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Ranking
+
+
+
+
+
+
+##  Pipeline Breakdown
+
+### Stage 1: Parallel Retrieval
+- BM25 for lexical matching
+- BGE-large-en-v1.5 for semantic retrieval
+
+### Stage 2: Dense Retrieval Optimization
+- Chunked exact search using PyTorch
+- Avoids ANN approximation errors
+
+### Stage 3: Fusion
+- Reciprocal Rank Fusion (RRF)
+
+### Stage 4: Reranking
+- ColBERTv2 with token-level MaxSim scoring
+
+
+
+
+
+##  Results
+
+| Method | nDCG@10 | MRR@10 |
+|--------|--------|--------|
+| BM25 | 0.2286 | 0.1796 |
+| Dense (BGE) | 0.4376 | 0.3619 |
+| TriRank | **0.4638** | **0.3825** |
+
+
+
+## 🛠️ Installation
+
+```bash
+git clone https://github.com/yourusername/trirank.git
+cd trirank
+
