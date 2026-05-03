@@ -4,7 +4,7 @@ A training-free 3-stage hybrid retrieval pipeline combining lexical, dense, and 
 
 ---
 
-##  Architecture
+## 🧠 Architecture
 
 <p align="center">
   <img src="images/pipeline.png" width="800"/>
@@ -16,7 +16,7 @@ A training-free 3-stage hybrid retrieval pipeline combining lexical, dense, and 
 
 ---
 
-##  Research Paper
+## 📄 Research Paper
 
 This repository contains the official implementation of our research paper:
 
@@ -28,26 +28,22 @@ This repository contains the official implementation of our research paper:
 
 ---
 
-##  Key Contributions
+## 🚀 Key Contributions
 
 - 3-stage hybrid retrieval pipeline:
   - BM25 (lexical retrieval)
   - BGE-large-en-v1.5 (dense retrieval)
   - ColBERTv2 (token-level reranking)
-
 - Training-free architecture (zero fine-tuning required)
-
 - Reciprocal Rank Fusion (RRF) for merging ranked results
-
 - GPU-optimized PyTorch chunked exact search over 8.8M embeddings
-
 - Achieved:
   - nDCG@10 = 0.4638
   - MRR@10 = 0.3825
 
 ---
 
-##  What is TriRank?
+## 💡 What is TriRank?
 
 TriRank is a hybrid retrieval system that combines keyword-based retrieval, semantic understanding, and token-level reranking to improve search precision.
 
@@ -58,31 +54,33 @@ It integrates:
 
 ---
 
-##  Pipeline Flow
+## 🔄 Pipeline Flow
 
+```
 Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Results
+```
 
 ---
 
-##  Pipeline Breakdown
+## ⚙️ Pipeline Breakdown
 
 ### Stage 1: Parallel Retrieval
-- BM25 for exact keyword matching
-- BGE-large-en-v1.5 for semantic retrieval
+- BM25 for exact keyword matching  
+- BGE-large-en-v1.5 for semantic retrieval  
 
 ### Stage 2: Dense Retrieval Optimization
-- PyTorch chunked exact search
-- Eliminates ANN approximation errors
+- PyTorch chunked exact search  
+- Eliminates ANN approximation errors  
 
 ### Stage 3: Fusion
-- Reciprocal Rank Fusion (RRF)
+- Reciprocal Rank Fusion (RRF)  
 
 ### Stage 4: Reranking
-- ColBERTv2 with token-level MaxSim scoring
+- ColBERTv2 with token-level MaxSim scoring  
 
 ---
 
-##  Results
+## 📊 Results
 
 | Method | nDCG@10 | MRR@10 |
 |--------|--------|--------|
@@ -97,32 +95,36 @@ Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Results
 ```bash
 git clone https://github.com/Jasithkadian/TriRank.git
 cd TriRank
-
-
-
-Install dependencies:
-
 pip install -r requirements.txt
+```
 
+Or manually:
+
+```bash
 pip install torch transformers datasets faiss-cpu pyserini sentence-transformers numpy pandas tqdm
+```
 
-Usage
+---
+
+## ▶️ Usage
 
 Run notebooks in this order:
 
-notebooks/00_setup.ipynb
-notebooks/01_bm25_baseline.ipynb
-notebooks/02_bge_dense_baseline.ipynb
-notebooks/02_bge_dense_exact.ipynb
-notebooks/03_rrf_fusion.ipynb
-notebooks/04_colbert_reranking.ipynb
-notebooks/05_ablations.ipynb
-notebooks/06_beir_benchmarks.ipynb
-notebooks/07_analytics.ipynb
+1. notebooks/00_setup.ipynb  
+2. notebooks/01_bm25_baseline.ipynb  
+3. notebooks/02_bge_dense_baseline.ipynb  
+4. notebooks/02_bge_dense_exact.ipynb  
+5. notebooks/03_rrf_fusion.ipynb  
+6. notebooks/04_colbert_reranking.ipynb  
+7. notebooks/05_ablations.ipynb  
+8. notebooks/06_beir_benchmarks.ipynb  
+9. notebooks/07_analytics.ipynb  
 
+---
 
-Project Structure
+## 📁 Project Structure
 
+```
 trirank/
 │── notebooks/
 │── scripts/
@@ -130,40 +132,47 @@ trirank/
 │── images/
 │── README.md
 │── requirements.txt
+```
 
+---
 
-Datasets
-MS MARCO
-BEIR Benchmark:
-SciFact
-NFCorpus
-ArguAna
-TREC-COVID
+## 📦 Datasets
+
+- MS MARCO  
+- BEIR Benchmark:
+  - SciFact  
+  - NFCorpus  
+  - ArguAna  
+  - TREC-COVID  
 
 Dataset setup instructions are inside:
- 
 notebooks/00_setup.ipynb
 
+---
 
-Reproducibility
+## 🧪 Reproducibility
 
 To reproduce results:
-
-Run notebooks sequentially
-Use MS MARCO / BEIR datasets
-Ensure GPU for dense retrieval
+- Run notebooks sequentially  
+- Use MS MARCO / BEIR datasets  
+- Ensure GPU for dense retrieval  
 
 Expected performance:
-nDCG@10 ≈ 0.4638
-MRR@10 ≈ 0.3825
+- nDCG@10 ≈ 0.4638  
+- MRR@10 ≈ 0.3825  
 
+---
 
-Additional Resources
- docs/TriRank_Project_Guide.md
- docs/workflow.md
- docs/memory_prompt.md
+## 📌 Additional Resources
 
-Contact
+- docs/TriRank_Project_Guide.md  
+- docs/workflow.md  
+- docs/memory_prompt.md  
 
-Jasith Kadian
-Email: jasithkadian@gmail.com
+---
+
+## 📬 Contact
+
+Jasith Kadian  
+Email: jasithkadian@gmail.com  
+GitHub: https://github.com/Jasithkadian
