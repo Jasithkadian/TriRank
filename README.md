@@ -196,9 +196,9 @@ Expected performance:
 ## 📬 Contact
 
 Jasith Kadian  
-Email: jasithkadian@gmail.com  
-GitHub: https://github.com/Jasithkadian
+- Email: jasithkadian@gmail.com  
+- GitHub: https://github.com/Jasithkadian
 
 Kurian Jose
-Email: kurianjoseoff@gmail.com
-Github: https://github.com/KurianJose7586
+- Email: kurianjoseoff@gmail.com 
+- Github: https://github.com/KurianJose7586
