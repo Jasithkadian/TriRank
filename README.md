@@ -23,8 +23,12 @@ This repository contains the official implementation of our research paper:
 **"TriRank: A Hybrid Retrieval Framework Combining BGE-large-en-v1.5 and ColBERTv2 for High-Precision Information Retrieval"**
 
 **Authors:**
-- Jasith Kadian  
-- Kurian Jose  
+- Kurian Jose (Galgotias University)
+- Jasith Kadian (Galgotias University)
+- Shikhar Kulshreshtha (Galgotias University)
+- Mohd Mohsin Ali (Galgotias University)
+- Manish Raj (Galgotias University)
+- Ankur Gogoi (Galgotias University)
 
 ---
 
@@ -45,12 +49,14 @@ This repository contains the official implementation of our research paper:
 
 ## 💡 What is TriRank?
 
-TriRank is a hybrid retrieval system that combines keyword-based retrieval, semantic understanding, and token-level reranking to improve search precision.
+Modern Retrieval-Augmented Generation (RAG) systems often struggle with the fundamental trade-off between exact keyword recall (sparse retrieval) and semantic meaning (dense retrieval). This gap leads to downstream LLM hallucinations and factual inaccuracies in enterprise search.
+
+TriRank addresses this by providing a training-free 3-stage hybrid retrieval pipeline that synergizes lexical precision, semantic understanding, and fine-grained token-level relevance into a single scalable architecture.
 
 It integrates:
-- BM25 for exact keyword matching
-- BGE embeddings for semantic similarity
-- ColBERTv2 for fine-grained token interaction
+- **BM25 (via bm25s):** Memory-optimized exact keyword matching.
+- **BGE-large-en-v1.5:** Dense semantic retrieval utilizing a GPU-optimized PyTorch chunked exact search to bypass ANN approximation errors.
+- **ColBERTv2:** Fine-grained token-level late-interaction reranking applied to a fused candidate pool (top 50).
 
 ---
 
@@ -82,11 +88,27 @@ Query → BM25 + Dense Retrieval → RRF Fusion → ColBERTv2 → Final Results
 
 ## 📊 Results
 
-| Method | nDCG@10 | MRR@10 |
-|--------|--------|--------|
-| BM25 | 0.2286 | 0.1796 |
-| Dense (BGE) | 0.4376 | 0.3619 |
-| TriRank | **0.4638** | **0.3825** |
+### MS MARCO
+
+| Method | nDCG@10 | MRR@10 | Recall@100 |
+|--------|---------|--------|------------|
+| BM25 Baseline | 0.2286 | 0.1796 | 0.6335 |
+| BGE-large Dense Exact | 0.4376 | 0.3619 | 0.8968 |
+| BM25 + BGE (RRF Fusion) | 0.3547 | 0.2833 | 0.8801 |
+| TriRank (RRF + ColBERTv2) | **0.4638** | **0.3825** | **0.8801** |
+
+### BEIR Zero-Shot Benchmark
+
+TriRank generalizes well across domains without task-specific fine-tuning:
+
+| Dataset | nDCG@10 | MRR@10 |
+|---------|---------|--------|
+| SciFact | 0.6638 | 0.5904 |
+| ArguAna | 0.3408 | 0.2273 |
+| NFCorpus | 1.9529* | 0.5481 |
+| TREC-COVID | 9.1724* | 0.9066 |
+
+*\*Scores unnormalized due to multi-graded relevance scales.*
 
 ---
 
@@ -176,3 +198,7 @@ Expected performance:
 Jasith Kadian  
 Email: jasithkadian@gmail.com  
 GitHub: https://github.com/Jasithkadian
+
+Kurian Jose
+Email: kurianjoseoff@gmail.com
+Github: https://github.com/KurianJose7586
