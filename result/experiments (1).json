@@ -1,0 +1,165 @@
+{
+  "BM25 baseline": {
+    "config": {
+      "k1": 0.9,
+      "b": 0.4,
+      "backend": "bm25s"
+    },
+    "metrics": {
+      "ndcg@10": 0.22860497106737496,
+      "mrr@10": 0.179596920907809,
+      "recall@100": 0.6335243553008596,
+      "latency_ms_total": 514416.96190834045
+    }
+  },
+  "BGE baseline": {
+    "config": {
+      "model": "BAAI/bge-large-en-v1.5",
+      "backend": "exact_search_chunked"
+    },
+    "metrics": {
+      "ndcg@10": 0.4376124860605579,
+      "mrr@10": 0.36189128803383813,
+      "recall@100": 0.8968481375358166
+    }
+  },
+  "RRF Fusion": {
+    "config": {
+      "models": [
+        "bm25s",
+        "BAAI/bge-large-en-v1.5"
+      ],
+      "fusion": "rrf",
+      "k": 60
+    },
+    "metrics": {
+      "ndcg@10": 0.3546523122834913,
+      "mrr@10": 0.28326437212898353,
+      "recall@100": 0.8800859598853868
+    }
+  },
+  "ColBERTv2 Reranker": {
+    "config": {
+      "model": "colbert-ir/colbertv2.0",
+      "candidates": 100
+    },
+    "metrics": {
+      "ndcg@10": 0.46380012485552247,
+      "mrr@10": 0.3825429230909183,
+      "recall@100": 0.8800859598853868,
+      "latency_ms": 23.43862036237744
+    }
+  },
+  "Ablation_PoolSize_25": {
+    "config": {
+      "pool_size": 25
+    },
+    "metrics": {
+      "ndcg@10": 0.451874066309825,
+      "mrr@10": 0.3768807704552696,
+      "colbert_latency_ms": 12.570769773171762
+    }
+  },
+  "Ablation_PoolSize_50": {
+    "config": {
+      "pool_size": 50
+    },
+    "metrics": {
+      "ndcg@10": 0.4645578405896663,
+      "mrr@10": 0.38382231545913587,
+      "colbert_latency_ms": 15.37462356780525
+    }
+  },
+  "Ablation_PoolSize_100": {
+    "config": {
+      "pool_size": 100
+    },
+    "metrics": {
+      "ndcg@10": 0.46380012485552247,
+      "mrr@10": 0.3825429230909183,
+      "colbert_latency_ms": 20.994753960552053
+    }
+  },
+  "Ablation_PoolSize_200": {
+    "config": {
+      "pool_size": 200
+    },
+    "metrics": {
+      "ndcg@10": 0.4633383925796119,
+      "mrr@10": 0.382205507800065,
+      "colbert_latency_ms": 29.452700396321905
+    }
+  },
+  "Ablation_RRF_k_10": {
+    "config": {
+      "rrf_k": 10
+    },
+    "metrics": {
+      "ndcg@10": 0.378376209095937,
+      "mrr@10": 0.2996040273798133
+    }
+  },
+  "Ablation_RRF_k_30": {
+    "config": {
+      "rrf_k": 30
+    },
+    "metrics": {
+      "ndcg@10": 0.36238133735082745,
+      "mrr@10": 0.2881544776458795
+    }
+  },
+  "Ablation_RRF_k_60": {
+    "config": {
+      "rrf_k": 60
+    },
+    "metrics": {
+      "ndcg@10": 0.3546523122834913,
+      "mrr@10": 0.28326437212898353
+    }
+  },
+  "Ablation_RRF_k_100": {
+    "config": {
+      "rrf_k": 100
+    },
+    "metrics": {
+      "ndcg@10": 0.35157144283659797,
+      "mrr@10": 0.28154659571564855
+    }
+  },
+  "TriRank_BEIR_nfcorpus": {
+    "config": {
+      "dataset": "nfcorpus"
+    },
+    "metrics": {
+      "ndcg@10": 1.952976380971422,
+      "mrr@10": 0.5481117008206792
+    }
+  },
+  "TriRank_BEIR_scifact": {
+    "config": {
+      "dataset": "scifact"
+    },
+    "metrics": {
+      "ndcg@10": 0.6638967531018299,
+      "mrr@10": 0.5904113756613755
+    }
+  },
+  "TriRank_BEIR_trec-covid": {
+    "config": {
+      "dataset": "trec-covid"
+    },
+    "metrics": {
+      "ndcg@10": 9.17247718015332,
+      "mrr@10": 0.9066666666666666
+    }
+  },
+  "TriRank_BEIR_arguana": {
+    "config": {
+      "dataset": "arguana"
+    },
+    "metrics": {
+      "ndcg@10": 0.3408978772019292,
+      "mrr@10": 0.22731942468784555
+    }
+  }
+}
